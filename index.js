@@ -1,8 +1,6 @@
-const mysql = require('mysql2');
 const inquirer = require('inquirer');
 const consoleTable = require('console.table');
 const connection = require('./config/connection');
-require('dotenv').config();
 
 connection.connect(function (err) {
     if (err) throw err;
@@ -35,7 +33,7 @@ function startPrompt() {
             viewAllRoles();
             break;
           case "View all employees":
-            viewallEmployees();
+            viewAllEmployees();
             break;
           case "Add a department":
             addDepartment();
@@ -47,7 +45,7 @@ function startPrompt() {
             addEmployee();
             break;
           case "Update employee role":
-            removeRole();
+            updateEmployeeRole();
             break;
           case "Exit":
             connection.end();
@@ -55,3 +53,39 @@ function startPrompt() {
         }
     });
 }
+
+async function viewAllDepartments() {
+    const query = "SELECT * FROM department";
+    const rows = await db.query(query);
+    console.table(rows);
+    return rows; 
+};
+
+function viewAllRoles() {
+    const query = "SELECT * FROM role";
+    const rows = await db.query(query);
+    console.table(rows);
+    return rows;
+};
+
+function viewAllEmployees() {
+    const query = "SELECT * FROM employee";
+    const rows = await db.query(query);
+    console.table(rows);
+};
+
+function addDepartment() {
+
+};
+
+function addRole() {
+
+};
+
+function addEmployee() {
+
+};
+
+function updateEmployeeRole() {
+
+};
