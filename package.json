@@ -1,0 +1,17 @@
+{
+  "name": "employee-tracker-cms",
+  "version": "1.0.0",
+  "description": "CMS application to manage company employee database",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "jacob kelly",
+  "license": "MIT",
+  "dependencies": {
+    "console.table": "^0.10.0",
+    "dotenv": "^10.0.0",
+    "inquirer": "^8.2.0",
+    "mysql2": "^2.3.0"
+  }
+}
