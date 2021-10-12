@@ -26,6 +26,32 @@ function startPrompt() {
           "Exit"
         ] 
     })
+    .then(function ({ task }) {
+        switch (task) {
+          case "View all departments":
+            viewAllDepartments();
+            break;
+          case "View all roles":
+            viewAllRoles();
+            break;
+          case "View all employees":
+            viewallEmployees();
+            break;
+          case "Add a department":
+            addDepartment();
+            break;
+          case "Add a role":
+            addRole();
+            break;
+          case "Add an employee":
+            addEmployee();
+            break;
+          case "Update employee role":
+            removeRole();
+            break;
+          case "Exit":
+            connection.end();
+            break;
+        }
+    });
 }
-
-
