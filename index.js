@@ -1,8 +1,8 @@
 const inquirer = require('inquirer');
 const consoleTable = require('console.table');
-const connection = require('./config/connection');
+const db = require('./config/connection');
 
-connection.connect(function (err) {
+db.connect(function (err) {
     if (err) throw err;
 
     startPrompt();
@@ -61,31 +61,42 @@ async function viewAllDepartments() {
     return rows; 
 };
 
-function viewAllRoles() {
+async function viewAllRoles() {
     const query = "SELECT * FROM role";
     const rows = await db.query(query);
     console.table(rows);
     return rows;
 };
 
-function viewAllEmployees() {
+async function viewAllEmployees() {
     const query = "SELECT * FROM employee";
     const rows = await db.query(query);
     console.table(rows);
 };
 
-function addDepartment() {
+async function addDepartment() {
 
 };
 
-function addRole() {
-
+async function addRole() {
+    const departmentId = await getDepartmentId(roleInfo.departmentName);
+    const salary = roleInfo.salary;
+    const title = roleInfo.roleName;
+    let query = 'INSERT into role (title, salary, department_id) VALUES (?,?,?)';
+    let args = [title, salary, departmentId];
+    const rows = await db.query(query, args);
+    console.log(`Added role ${title}`);
 };
 
-function addEmployee() {
-
+async function addEmployee() {
+    const roleId = await getRoleId(employeeInfo.role);
+    const managerId = await getEmployeeId(employeeInfo.manager);
+    const query = "INSERT into employee (first_name, last_name, role_id, manager_id) VALUES (?,?,?,?)";
+    const args = [employeeInfo.first_name, employeeInfo.last_name, roleId, managerId];
+    const rows = await db.query(query, args);
+    console.log(`Added employee ${employeeInfo.first_name} ${employeeInfo.last_name}.`);
 };
 
-function updateEmployeeRole() {
+async function updateEmployeeRole() {
 
 };
