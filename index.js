@@ -3,7 +3,6 @@ const consoleTable = require('console.table');
 let Connection = require('./config/connection');
 require('dotenv').config()
 
-
 const db = new Connection({
   host: "localhost",
   user: "root",
@@ -147,6 +146,58 @@ function fetchEmployeeFullName(fullName) {
   return [first_name.trim(), last_name];
 }
 
+async function startPrompt() {
+  return inquirer
+    .prompt([
+      {
+        name: "action",
+        type: "list",
+        message: "What would you like to do?",
+        choices: [
+          "Add department",
+          "Add employee",
+          "Add role",
+          "Remove employee",
+          "Update employee role",
+          "View all departments",
+          "View all employees",
+          "View all employees by department",
+          "View all roles",
+          "Exit"
+        ]
+      }
+    ])
+}
+
+async function fetchNewEmployeeInfo() {
+  const managers = await fetchManagerNames();
+  const roles = await fetchRoleNames();
+  return inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "first_name",
+        message: "What is the employee's first name?"
+      },
+      {
+        type: "input",
+        name: "last_name",
+        message: "What is the employee's last name?"
+      },
+      {
+        type: "list",
+        message: "What is the employee's role?",
+        name: "role",
+        choices: [...roles]
+      },
+      {
+        type: "list",
+        message: "Who is the employee's manager?",
+        name: "manager",
+        choices: [...managers]
+      }
+    ])
+}
 
 
 async function start() {
@@ -156,7 +207,7 @@ async function start() {
 
     switch (prompt.action) {
       case 'Add department': {
-        const newDepartmentName = await fetchDepartmentNames();
+        const newDepartmentName = await fetchNewDeptInfo();
         await addNewDepartment(newDepartmentName);
         break;
       }
@@ -170,14 +221,14 @@ async function start() {
       }
 
       case 'Add role': {
-        const newRole = await ();
+        const newRole = await fetchNewRoleInfo();
         console.log("add a role");
         await addNewRole(newRole);
         break;
       }
 
       case 'Update employee role': {
-        const employee = await ();
+        const employee = await fetchUpdatedRoleInfo();
         await updateEmployeeRole(employee);
         break;
       }
