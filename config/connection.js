@@ -2,7 +2,7 @@ const mySql = require("mysql2");
 
 class Connection {
     constructor(config) {
-        this.connection = mysql.createConnection(config);
+        this.connection = mySql.createConnection(config);
     }
     query(sql, args) {
         return new Promise((resolve, reject) => {
