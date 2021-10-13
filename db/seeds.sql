@@ -20,9 +20,9 @@ VALUES
 
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
 VALUES 
-('Anwar', 'Brown', 1, 890),
-('Cynthia', 'Drangus', 2, 999),
-('Esteban', 'Farnswerth', 3, 789),
-('Georgina', 'Isenberg', 4, 777),
-('Jacob', 'Kelly', 5, 119),
+('Anwar', 'Brown', 1, NULL),
+('Cynthia', 'Drangus', 2, 1),
+('Esteban', 'Farnswerth', 3, 4),
+('Georgina', 'Isenberg', 4, 7),
+('Jacob', 'Kelly', 5, NULL),
 ('Lorraine', 'Morningstar', 6, NULL);
