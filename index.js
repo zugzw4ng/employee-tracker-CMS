@@ -154,15 +154,13 @@ async function startPrompt() {
         type: "list",
         message: "What would you like to do?",
         choices: [
-          "Add department",
-          "Add employee",
-          "Add role",
-          "Remove employee",
-          "Update employee role",
-          "View all departments",
           "View all employees",
-          "View all employees by department",
+          "Add employee",
+          "Update employee role",
           "View all roles",
+          "Add role",
+          "View all departments",
+          "Add department",
           "Exit"
         ]
       }
@@ -199,6 +197,49 @@ async function fetchNewEmployeeInfo() {
     ])
 }
 
+async function fetchNewRoleInfo() {
+  const departments = await fetchDepartmentNames();
+  return inquirer
+    .prompt([
+      {
+        type: "input",
+        message: "What is the title of the new role?",
+        name: "roleName"
+      },
+      {
+        type: "input",
+        message: "What is the salary of the new role?",
+        name: "salary"
+      },
+      {
+        type: "list",
+        message: "Which department uses this role?",
+        name: "departmentName",
+        choices: [...departments]
+      }
+    ])
+}
+
+async function fetchUpdatedRoleInfo() {
+  const employees = await fetchEmployeeNames();
+  const roles = await fetchRoleNames();
+  return inquirer
+    .prompt([
+      {
+        type: "list",
+        message: "Which employee do you want to update?",
+        name: "employeeName",
+        choices: [...employees]
+      },
+      {
+        type: "list",
+        message: "What is the employee's new role?",
+        name: "role",
+        choices: [...roles]
+      }
+    ])
+
+}
 
 async function start() {
   let exitMenu = false;
