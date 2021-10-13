@@ -196,6 +196,17 @@ async function fetchNewEmployeeInfo() {
       }
     ])
 }
+async function fetchNewDeptInfo() {
+  return inquirer
+  .prompt([
+      {
+          type: "input",
+          message: "What is the name of the new department?",
+          name: "departmentName"
+      }
+  ])
+}
+
 
 async function fetchNewRoleInfo() {
   const departments = await fetchDepartmentNames();
