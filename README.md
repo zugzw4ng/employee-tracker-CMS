@@ -11,7 +11,7 @@ A simple command line application that allows the user to manage a company's emp
 ## Table of Contents 
 ------
 
-* [Installation](#installation)
+* [Installation & Usage](#installation)
 
 * [About](#about)
 
