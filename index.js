@@ -21,21 +21,21 @@ async function fetchManagerNames() {
 }
 
 async function fetchRoleNames() {
-  let query = "SELECT title FROM role";
+  let query = "SELECT * FROM role";
   const rows = await db.query(query);
   let roles = [];
-  for (const row of rows) {
-    roles.push(row.title);
+  for (const role of rows) {
+    roles.push(role.title);
   }
   return roles;
 }
 
 async function fetchDepartmentNames() {
-  let query = "SELECT * FROM department";
+  let query = "SELECT department_name FROM department";
   const rows = await db.query(query);
   let departments = [];
-  for (const row of rows) {
-    departments.push(row.department_name);
+  for (const department of rows) {
+    departments.push(department.department_name);
   }
   return departments;
 }
@@ -117,14 +117,14 @@ async function addNewEmployee(employeeInfo) {
 // READ (.U.D)
 async function viewAllDepartments() {
   let query = "SELECT * FROM department";
-  const rows = db.query(query);
+  const rows = await db.query(query);
   console.table(rows);
 };
 
 async function viewAllRoles() {
   console.log("");
   let query = "SELECT * FROM role";
-  const rows = db.query(query);
+  const rows = await db.query(query);
   console.table(rows);
   return rows;
 };
